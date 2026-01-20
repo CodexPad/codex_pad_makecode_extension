@@ -1,0 +1,45 @@
+{
+    "name": "CodexPad",
+    "version": "1.0.0",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "bluetooth": "*"
+    },
+    "files": [
+        "README.md",
+        "codex_pad_inputs_service.h",
+        "codex_pad_inputs_service.cpp",
+        "codex_pad.cpp",
+        "codex_pad.ts",
+        "fifo.h",
+        "main.blocks"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj",
+    "targetVersions": {
+        "target": "6.0.26",
+        "targetId": "microbit"
+    },
+    "disablesVariants": [
+        "mbdal"
+    ],
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "open": 1,
+                    "whitelist": 0,
+                    "security_level": "SECURITY_MODE_ENCRYPTION_NO_MITM",
+                    "device_info_service": 0
+                }
+            }
+        }
+    }
+}
