@@ -65,12 +65,7 @@ void CodexPadInputsService::Start(const char* central_mac_address, const uint8_t
   central_mac_address_.addr[2] = (HexCharToInt(central_mac_address[9]) << 4) | HexCharToInt(central_mac_address[10]);
   central_mac_address_.addr[1] = (HexCharToInt(central_mac_address[12]) << 4) | HexCharToInt(central_mac_address[13]);
   central_mac_address_.addr[0] = (HexCharToInt(central_mac_address[15]) << 4) | HexCharToInt(central_mac_address[16]);
-
-  if ((central_mac_address_.addr[0] & 0xC0) == 0xC0) {
-    central_mac_address_.addr_type = BLE_GAP_ADDR_TYPE_RANDOM_STATIC;
-  } else {
-    central_mac_address_.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
-  }
+  central_mac_address_.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
 
   StartAdvertising();
 }
