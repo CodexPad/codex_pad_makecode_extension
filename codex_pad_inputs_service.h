@@ -24,7 +24,7 @@ class CodexPadInputsService : public MicroBitBLEService {
 #pragma pack(pop)
 
   static CodexPadInputsService& GetInstance();
-  void Start(const char* central_mac_address, const uint8_t central_mac_address_length);
+  void Start(const char* central_bluetooth_device_address, const uint8_t central_bluetooth_device_address_length);
   CodexPadInputsService();
   Buffer FetchInputs();
 
@@ -39,7 +39,7 @@ class CodexPadInputsService : public MicroBitBLEService {
   void StartAdvertising();
 
   uint8_t inputs_buffer_[sizeof(Inputs)] = {0};
-  ble_gap_addr_t central_mac_address_;
+  ble_gap_addr_t central_bluetooth_device_address_;
   MicroBitBLEChar inputs_characteristic_;
   Fifo<Inputs> inputs_queue_;
 };

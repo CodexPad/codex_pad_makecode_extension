@@ -8,8 +8,8 @@ using namespace pxt;
 namespace codex_pad {
 
 //%
-void startReceiverService(String central_mac_address) {
-  CodexPadInputsService::GetInstance().Start(central_mac_address->ascii.data, central_mac_address->ascii.length);
+void startReceiverService(String central_bluetooth_device_address) {
+  CodexPadInputsService::GetInstance().Start(central_bluetooth_device_address->ascii.data, central_bluetooth_device_address->ascii.length);
 }
 
 //%

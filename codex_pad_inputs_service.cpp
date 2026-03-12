@@ -52,20 +52,20 @@ CodexPadInputsService::CodexPadInputsService() : inputs_queue_(4) {
       0, kInputsCharacteristicUuid, inputs_buffer_, sizeof(inputs_buffer_), sizeof(inputs_buffer_), microbit_propWRITE | microbit_propWRITE_WITHOUT);
 }
 
-void CodexPadInputsService::Start(const char* central_mac_address, const uint8_t central_mac_address_length) {
-  LOG("Start: %s\n", ManagedString(central_mac_address, central_mac_address_length).toCharArray());
+void CodexPadInputsService::Start(const char* central_bluetooth_device_address, const uint8_t central_bluetooth_device_address_length) {
+  LOG("Start: %s\n", ManagedString(central_bluetooth_device_address, central_bluetooth_device_address_length).toCharArray());
   // "F4:4E:FC:EC:D7:F5"
-  if (central_mac_address == nullptr || central_mac_address_length != 17) {
+  if (central_bluetooth_device_address == nullptr || central_bluetooth_device_address_length != 17) {
     microbit_panic(DEVICE_INVALID_PARAMETER);
   }
 
-  central_mac_address_.addr[5] = (HexCharToInt(central_mac_address[0]) << 4) | HexCharToInt(central_mac_address[1]);
-  central_mac_address_.addr[4] = (HexCharToInt(central_mac_address[3]) << 4) | HexCharToInt(central_mac_address[4]);
-  central_mac_address_.addr[3] = (HexCharToInt(central_mac_address[6]) << 4) | HexCharToInt(central_mac_address[7]);
-  central_mac_address_.addr[2] = (HexCharToInt(central_mac_address[9]) << 4) | HexCharToInt(central_mac_address[10]);
-  central_mac_address_.addr[1] = (HexCharToInt(central_mac_address[12]) << 4) | HexCharToInt(central_mac_address[13]);
-  central_mac_address_.addr[0] = (HexCharToInt(central_mac_address[15]) << 4) | HexCharToInt(central_mac_address[16]);
-  central_mac_address_.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
+  central_bluetooth_device_address_.addr[5] = (HexCharToInt(central_bluetooth_device_address[0]) << 4) | HexCharToInt(central_bluetooth_device_address[1]);
+  central_bluetooth_device_address_.addr[4] = (HexCharToInt(central_bluetooth_device_address[3]) << 4) | HexCharToInt(central_bluetooth_device_address[4]);
+  central_bluetooth_device_address_.addr[3] = (HexCharToInt(central_bluetooth_device_address[6]) << 4) | HexCharToInt(central_bluetooth_device_address[7]);
+  central_bluetooth_device_address_.addr[2] = (HexCharToInt(central_bluetooth_device_address[9]) << 4) | HexCharToInt(central_bluetooth_device_address[10]);
+  central_bluetooth_device_address_.addr[1] = (HexCharToInt(central_bluetooth_device_address[12]) << 4) | HexCharToInt(central_bluetooth_device_address[13]);
+  central_bluetooth_device_address_.addr[0] = (HexCharToInt(central_bluetooth_device_address[15]) << 4) | HexCharToInt(central_bluetooth_device_address[16]);
+  central_bluetooth_device_address_.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
 
   StartAdvertising();
 }
@@ -112,7 +112,7 @@ void CodexPadInputsService::StartAdvertising() {
   ble_gap_adv_params_t gap_adv_params;
   memset(&gap_adv_params, 0, sizeof(gap_adv_params));
 
-  gap_adv_params.p_peer_addr = &central_mac_address_;
+  gap_adv_params.p_peer_addr = &central_bluetooth_device_address_;
 
   gap_adv_params.properties.type = BLE_GAP_ADV_TYPE_CONNECTABLE_NONSCANNABLE_DIRECTED;
   gap_adv_params.interval = (1000 * MICROBIT_BLE_ADVERTISING_INTERVAL /* interval_ms */) / 625;  // 625 us units

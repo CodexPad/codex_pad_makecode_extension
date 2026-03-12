@@ -109,14 +109,14 @@ namespace codex_pad {
     let g_on_button_holding: { [key: number]: Action } = {};
 
     /**
-     * Start receiver service and wait for CodexPad with specified MAC address
-     * @param mac Bluetooth MAC address
+     * Start receiver service and wait for CodexPad with specified Bluetooth Device Address
+     * @param bluetooth_device_address Bluetooth Device Address of CodexPad
      */
-    //% block="start receiver service wait for CodexPad $mac" 
+    //% block="start receiver service wait for CodexPad $bluetooth_device_address"
     //% group="Connection" weight=100 blockGap=8
-    //% mac.defl="00:00:00:00:00:00"
+    //% bluetooth_device_address.defl="00:00:00:00:00:00"
     //% shim=codex_pad::startReceiverService
-    export function startReceiverService(mac: string): void {
+    export function startReceiverService(bluetooth_device_address: string): void {
         return;
     }
 
