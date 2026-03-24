@@ -6,12 +6,10 @@
 
 本扩展是专为**CodexPad**系列手柄提供的MakeCode扩展，支持**micro:bit**通过蓝牙连接并读取CodexPad手柄的所有按键与摇杆输入状态。关于 CodexPad 产品的详细硬件信息，请查阅以下产品文档。
 
-*每个型号的产品文档在以下两个链接的内容相同，请根据您的网络环境选择链接查看*：
-
-| CodexPad型号 | 产品详情链接 |
+| CodexPad型号 | 详情 |
 | :--- | :--- |
-| CodexPad-C10 | [1. 大陆版（Gitee）链接（推荐中国大陆用户查看)](https://gitee.com/CodexPad/codex_pad_c10#codexpad-c10)<br>[2. 国际版（GitHub）链接](https://github.com/CodexPad/codex_pad_c10/blob/main/README_CN.md#codexpad-c10) |
-| CodexPad-S10 | [1. 大陆版（Gitee）链接（推荐中国大陆用户查看)](https://gitee.com/CodexPad/codex_pad_s10#codexpad-s10) <br> [2. 国际版（GitHub）链接](https://github.com/CodexPad/codex_pad_s10/blob/main/README_CN.md#codexpad-s10) |
+| CodexPad-C10 | [产品详情](../../../codex_pad_c10/blob/main/README_CN.md#codexpad-c10) |
+| CodexPad-S10 | [产品详情](../../../codex_pad_s10/blob/main/README_CN.md#codexpad-s10) |
 
 ## 特性
 
