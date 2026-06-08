@@ -58,11 +58,12 @@
 
 ## 示例说明
 
-## 基础轮询示例
+### 基础轮询示例
 
 - **示例链接**：<https://makecode.microbit.org/S92002-05924-33203-41301>
 - **使用步骤**：在代码块或者代码中找到 `E4:66:E5:A2:24:5D` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
 - **运行结果**：
+
   - Micro:bit首先显示笑脸图标（`IconNames.Happy`），并启动蓝牙接收服务等待连接。
   - 连接成功后，Micro:bit**串口输出"connected"**，同时**LED点阵屏显示对勾图标**（`IconNames.Yes`），手柄的蓝牙连接指示灯常亮。
   - 断开连接时，**串口输出"disconnected"**，同时**LED点阵屏显示叉图标**（`IconNames.No`）。
@@ -106,11 +107,12 @@
 
     - 操作左右摇杆时， Micro:bit会通过串口输出摇杆XY轴的坐标值（0 ~ 255）
 
-## 事件驱动示例
+### 事件驱动示例
 
 - **示例链接**：<https://makecode.microbit.org/S87495-48874-28272-18977>
 - **使用步骤**：在代码块或者代码中找到 `E4:66:E5:A2:24:5D` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
 - **运行结果**：
+
   - Micro:bit首先显示笑脸图标（`IconNames.Happy`），并启动蓝牙接收服务等待连接。
   - 连接成功后，Micro:bit**串口输出"connected"**，同时**LED点阵屏显示对勾图标**（`IconNames.Yes`），手柄的蓝牙连接指示灯常亮。
   - 断开连接时，**串口输出"disconnected"**，同时**LED点阵屏显示叉图标**（`IconNames.No`）。
