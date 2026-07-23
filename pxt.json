@@ -1,6 +1,6 @@
 {
     "name": "CodexPad",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -13,7 +13,9 @@
         "codex_pad.cpp",
         "codex_pad.ts",
         "fifo.h",
-        "main.blocks"
+        "main.blocks",
+        "_locales/zh/CodexPad-jsdoc-strings.json",
+        "_locales/zh/CodexPad-strings.json"
     ],
     "testFiles": [
         "test.ts"
