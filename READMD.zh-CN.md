@@ -33,7 +33,7 @@
 
 > **⚠️ 重要提示**：本库直连的示例是通过 **Bluetooth Device Address(BD_ADDR)** 进行连接。**编程时，必须在代码明确指定您手柄的Bluetooth Device Address(BD_ADDR)。**
 
-请参考产品手册中提供的方法，获取您手柄的**Bluetooth Device Address(BD_ADDR)**。其格式通常为 `"E4:66:E5:A2:24:5D"`（由0-9、A-F的字符组成，冒号为半角）。请妥善记录此信息，后续需要在代码为您自己手柄的实际**Bluetooth Device Address(BD_ADDR)**。
+请参考产品手册中提供的方法，获取您手柄的**Bluetooth Device Address(BD_ADDR)**。其格式通常为 `"16:00:00:00:02:72"`（由0-9、A-F的字符组成，冒号为半角）。请妥善记录此信息，后续需要在代码为您自己手柄的实际**Bluetooth Device Address(BD_ADDR)**。
 
 #### 开启手柄并进入待连接状态
 
@@ -60,8 +60,8 @@
 
 ### 基础轮询示例
 
-- **示例链接**：<https://makecode.microbit.org/S92002-05924-33203-41301>
-- **使用步骤**：在代码块或者代码中找到 `E4:66:E5:A2:24:5D` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
+- **示例链接**：<https://makecode.microbit.org/S77949-06939-68874-99822>
+- **使用步骤**：在代码块或者代码中找到 `16:00:00:00:02:72` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
 - **运行结果**：
 
   - Micro:bit首先显示笑脸图标（`IconNames.Happy`），并启动蓝牙接收服务等待连接。
@@ -109,8 +109,8 @@
 
 ### 事件驱动示例
 
-- **示例链接**：<https://makecode.microbit.org/S87495-48874-28272-18977>
-- **使用步骤**：在代码块或者代码中找到 `E4:66:E5:A2:24:5D` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
+- **示例链接**：<https://makecode.microbit.org/S69978-22134-36835-32420>
+- **使用步骤**：在代码块或者代码中找到 `16:00:00:00:02:72` 这个地址内容信息，将内容**替换为您自己手柄的Bluetooth Device Address**。
 - **运行结果**：
 
   - Micro:bit首先显示笑脸图标（`IconNames.Happy`），并启动蓝牙接收服务等待连接。
