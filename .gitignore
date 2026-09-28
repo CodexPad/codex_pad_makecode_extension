@@ -11,3 +11,6 @@ _site
 .header.json
 .simstate.json
 /coda-
+/.vscode
+/package-lock.json
+/package.json

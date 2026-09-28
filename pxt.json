@@ -1,6 +1,6 @@
 {
     "name": "CodexPad",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -21,14 +21,14 @@
         "test.ts"
     ],
     "public": true,
-    "supportedTargets": [
-        "microbit"
-    ],
-    "preferredEditor": "blocksprj",
     "targetVersions": {
         "target": "6.0.26",
         "targetId": "microbit"
     },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj",
     "disablesVariants": [
         "mbdal"
     ],

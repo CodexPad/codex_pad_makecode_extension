@@ -30,12 +30,8 @@ class CodexPadInputsService : public MicroBitBLEService {
 
  private:
   void onDataWritten(const microbit_ble_evt_write_t* params) override;
-  int characteristicCount() override {
-    return 1;
-  }
-  MicroBitBLEChar* characteristicPtr(int idx) override {
-    return &inputs_characteristic_;
-  }
+  int characteristicCount() override { return 1; }
+  MicroBitBLEChar* characteristicPtr(int idx) override { return &inputs_characteristic_; }
   void StartAdvertising();
 
   uint8_t inputs_buffer_[sizeof(Inputs)] = {0};
