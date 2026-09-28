@@ -10,14 +10,30 @@
 
 #if CONFIG_ENABLED(DEVICE_BLE)
 #include "MicroBitBLEService.h"
+#include "app_timer.h"
 #include "ble.h"
 #include "ble_advdata.h"
+#include "ble_conn_params.h"
 #include "nrf_sdh_ble.h"
 #include "peer_manager.h"
 
 namespace {
 constexpr uint16_t kInputsServiceUuid = 0xFF10;
 constexpr uint16_t kInputsCharacteristicUuid = 0xFF11;
+
+// Minimum connection interval (units of 1.25ms)
+constexpr uint16_t kConnectionParamMinInterval = 6;  // 7.5ms
+
+// Maximum connection interval (units of 1.25ms)
+constexpr uint16_t kConnectionParamMaxInterval = 8;  // 10ms
+
+// Slave latency to use parameter update
+constexpr uint8_t kConnectionParamLatency = 0;
+
+// Supervision timeout value (units of 10ms)
+constexpr uint16_t kConnectionParamSupervisionTimeout = 20;  // 200ms
+
+static_assert(kConnectionParamSupervisionTimeout * 10.0 > (1 + kConnectionParamLatency) * kConnectionParamMaxInterval * 2 * 1.25);
 
 uint8_t HexCharToInt(const char c) {
   if (c >= '0' && c <= '9') {
@@ -48,29 +64,41 @@ CodexPadInputsService::CodexPadInputsService() : inputs_queue_(4) {
   uBit.bleManager.stopAdvertising();
 
   CreateService(kInputsServiceUuid);
-  CreateCharacteristic(
-      0, kInputsCharacteristicUuid, inputs_buffer_, sizeof(inputs_buffer_), sizeof(inputs_buffer_), microbit_propWRITE | microbit_propWRITE_WITHOUT);
+  CreateCharacteristic(0, kInputsCharacteristicUuid, inputs_buffer_, sizeof(inputs_buffer_), sizeof(inputs_buffer_),
+                       microbit_propWRITE | microbit_propWRITE_WITHOUT);
 }
 
-void CodexPadInputsService::Start(const char* central_bluetooth_device_address, const uint8_t central_bluetooth_device_address_length) {
+void CodexPadInputsService::Start(const char* central_bluetooth_device_address,
+                                  const uint8_t central_bluetooth_device_address_length) {
   LOG("Start: %s\n", ManagedString(central_bluetooth_device_address, central_bluetooth_device_address_length).toCharArray());
   // "F4:4E:FC:EC:D7:F5"
   if (central_bluetooth_device_address == nullptr || central_bluetooth_device_address_length != 17) {
     microbit_panic(DEVICE_INVALID_PARAMETER);
   }
 
-  central_bluetooth_device_address_.addr[5] = (HexCharToInt(central_bluetooth_device_address[0]) << 4) | HexCharToInt(central_bluetooth_device_address[1]);
-  central_bluetooth_device_address_.addr[4] = (HexCharToInt(central_bluetooth_device_address[3]) << 4) | HexCharToInt(central_bluetooth_device_address[4]);
-  central_bluetooth_device_address_.addr[3] = (HexCharToInt(central_bluetooth_device_address[6]) << 4) | HexCharToInt(central_bluetooth_device_address[7]);
-  central_bluetooth_device_address_.addr[2] = (HexCharToInt(central_bluetooth_device_address[9]) << 4) | HexCharToInt(central_bluetooth_device_address[10]);
-  central_bluetooth_device_address_.addr[1] = (HexCharToInt(central_bluetooth_device_address[12]) << 4) | HexCharToInt(central_bluetooth_device_address[13]);
-  central_bluetooth_device_address_.addr[0] = (HexCharToInt(central_bluetooth_device_address[15]) << 4) | HexCharToInt(central_bluetooth_device_address[16]);
+  central_bluetooth_device_address_.addr[5] =
+      (HexCharToInt(central_bluetooth_device_address[0]) << 4) | HexCharToInt(central_bluetooth_device_address[1]);
+  central_bluetooth_device_address_.addr[4] =
+      (HexCharToInt(central_bluetooth_device_address[3]) << 4) | HexCharToInt(central_bluetooth_device_address[4]);
+  central_bluetooth_device_address_.addr[3] =
+      (HexCharToInt(central_bluetooth_device_address[6]) << 4) | HexCharToInt(central_bluetooth_device_address[7]);
+  central_bluetooth_device_address_.addr[2] =
+      (HexCharToInt(central_bluetooth_device_address[9]) << 4) | HexCharToInt(central_bluetooth_device_address[10]);
+  central_bluetooth_device_address_.addr[1] =
+      (HexCharToInt(central_bluetooth_device_address[12]) << 4) | HexCharToInt(central_bluetooth_device_address[13]);
+  central_bluetooth_device_address_.addr[0] =
+      (HexCharToInt(central_bluetooth_device_address[15]) << 4) | HexCharToInt(central_bluetooth_device_address[16]);
   central_bluetooth_device_address_.addr_type = BLE_GAP_ADDR_TYPE_PUBLIC;
 
   StartAdvertising();
 }
 
 Buffer CodexPadInputsService::FetchInputs() {
+  if (!getConnected()) {
+    inputs_queue_.Clear();
+    return mkBuffer(nullptr, 0);
+  }
+
   bool empty = false;
   CRITICAL_REGION_ENTER();
   empty = inputs_queue_.empty();
@@ -108,6 +136,24 @@ void CodexPadInputsService::onDataWritten(const microbit_ble_evt_write_t* params
 
 void CodexPadInputsService::StartAdvertising() {
   uBit.bleManager.stopAdvertising();
+
+  ble_gap_conn_params_t gap_conn_params;
+  memset(&gap_conn_params, 0, sizeof(gap_conn_params));
+  gap_conn_params.min_conn_interval = kConnectionParamMinInterval;
+  gap_conn_params.max_conn_interval = kConnectionParamMaxInterval;
+  gap_conn_params.slave_latency = kConnectionParamLatency;
+  gap_conn_params.conn_sup_timeout = kConnectionParamSupervisionTimeout;
+  MICROBIT_BLE_ECHK(sd_ble_gap_ppcp_set(&gap_conn_params));
+
+  ble_conn_params_init_t cp_init;
+  memset(&cp_init, 0, sizeof(cp_init));
+  cp_init.p_conn_params = &gap_conn_params;
+  cp_init.first_conn_params_update_delay = APP_TIMER_TICKS(600);
+  cp_init.next_conn_params_update_delay = APP_TIMER_TICKS(1000);
+  cp_init.max_conn_params_update_count = 1;
+  cp_init.start_on_notify_cccd_handle = BLE_GATT_HANDLE_INVALID;
+  cp_init.disconnect_on_fail = false;
+  MICROBIT_BLE_ECHK(ble_conn_params_init(&cp_init));
 
   ble_gap_adv_params_t gap_adv_params;
   memset(&gap_adv_params, 0, sizeof(gap_adv_params));

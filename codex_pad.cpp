@@ -9,17 +9,14 @@ namespace codex_pad {
 
 //%
 void startReceiverService(String central_bluetooth_device_address) {
-  CodexPadInputsService::GetInstance().Start(central_bluetooth_device_address->ascii.data, central_bluetooth_device_address->ascii.length);
+  CodexPadInputsService::GetInstance().Start(central_bluetooth_device_address->ascii.data,
+                                             central_bluetooth_device_address->ascii.length);
 }
 
 //%
-bool isConnected() {
-  return CodexPadInputsService::GetInstance().getConnected();
-}
+bool isConnected() { return CodexPadInputsService::GetInstance().getConnected(); }
 
 //%
-Buffer fetchInputs() {
-  return CodexPadInputsService::GetInstance().FetchInputs();
-}
+Buffer fetchInputs() { return CodexPadInputsService::GetInstance().FetchInputs(); }
 
 }  // namespace codex_pad
