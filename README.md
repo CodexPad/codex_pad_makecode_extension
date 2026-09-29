@@ -60,8 +60,8 @@ Add the CodexPad extension in MakeCode:
 
 ### Basic Polling Example
 
-- **Example link**: <https://makecode.microbit.org/S92002-05924-33203-41301>
-- **Steps**: In the code blocks or code, find the address `E4:66:E5:A2:24:5D` and **replace it with your own gamepad's Bluetooth Device Address**.
+- **Example link**: <https://makecode.microbit.org/S84931-34869-54606-42662>
+- **Steps**: In the code blocks or code, find the address `E4:66:E5:A2:17:06` and **replace it with your own gamepad's Bluetooth Device Address**.
 - **Results**:
 
   - The micro:bit first displays a smiley face icon (`IconNames.Happy`) and starts the Bluetooth receiving service to wait for a connection.
@@ -109,7 +109,7 @@ Add the CodexPad extension in MakeCode:
 ### Event-Driven Example
 
 - **Example link**: <https://makecode.microbit.org/S87495-48874-28272-18977>
-- **Steps**: In the code blocks or code, find the address `E4:66:E5:A2:24:5D` and **replace it with your own gamepad's Bluetooth Device Address**.
+- **Steps**: In the code blocks or code, find the address `E4:66:E5:A2:17:06` and **replace it with your own gamepad's Bluetooth Device Address**.
 - **Results**:
 
   - The micro:bit first displays a smiley face icon (`IconNames.Happy`) and starts the Bluetooth receiving service to wait for a connection.
