@@ -4,16 +4,11 @@
 
 ## Overview
 
-This extension is the MakeCode extension designed for **CodexPad** series controllers. It supports **micro:bit** in connecting to and reading the input status of all buttons and joysticks on a CodexPad controller via Bluetooth. For detailed information about CodexPad products, please refer to the product documentation below.
-
-| CodexPad Model | Details |
-| :--- | :--- |
-| CodexPad-C10 | [Product Details](../../../codex_pad_c10/blob/main/README.md#codexpad-c10) |
-| CodexPad-S10 | [Product Details](../../../codex_pad_s10/blob/main/README.md#codexpad-s10) |
+This extension is the MakeCode extension designed for **CodexPad** series controllers. It supports **micro:bit** in connecting to and reading the input status of all buttons and joysticks on a CodexPad controller via Bluetooth.
 
 ## Features
 
-- **Direct Connection via Bluetooth Device Address**: Quickly establish a stable connection with a specific controller using a known Bluetooth Device Address.
+- **Direct Connection via Address**: Quickly establish a stable connection with a specific controller using a known Address.
 
 - **Real-time Button Event Detection**: Reads the input status of all buttons in real time, distinguishing between **Pressed**, **Released**, and **Holding** events.
 
@@ -27,13 +22,12 @@ Before starting to program, complete the following preparations to ensure a smoo
 
 #### Familiarize Yourself with the Product Documentation
 
-Read the CodexPad product manual in detail to fully understand the hardware features, familiarize yourself with the controller's button/joystick layout, function definitions, indicator light statuses, and power on/off operations.
+Read the CodexPad product manual in detail to fully understand the hardware features, familiarize yourself with the controller's button/joystick layout, function definitions, indicator light statuses, Obtaining address, and power on/off operations.
 
-#### Obtain and Record the Controller's Bluetooth Device Address (BD_ADDR)
-
-> ⚠️ Important Note: The direct connection example in this library connects using the Bluetooth Device Address (BD_ADDR). When programming, you must explicitly specify your controller's Bluetooth Device Address (BD_ADDR) in the code.
-
-Please refer to the method provided in the product manual to obtain your controller's **Bluetooth Device Address (BD_ADDR)**. It is typically in the format "`E4:66:E5:A2:24:5D`"(consisting of characters 0-9, A-F, with colons as half-width symbols). Record this information properly, as you will need to input your controller's actual **Bluetooth Device Address (BD_ADDR)** in the code later.
+| CodexPad Model | Details |
+| :--- | :--- |
+| CodexPad-C10 | [Product Details](../../../codex_pad_c10/blob/main/README.md#codexpad-c10) |
+| CodexPad-S10 | [Product Details](../../../codex_pad_s10/blob/main/README.md#codexpad-s10) |
 
 #### Power On the Controller and Enter Pairing Mode
 

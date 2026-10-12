@@ -4,16 +4,11 @@
 
 ## 概述
 
-本扩展是专为**CodexPad**系列手柄提供的MakeCode扩展，支持**micro:bit**通过蓝牙连接并读取CodexPad手柄的所有按键与摇杆输入状态。关于 CodexPad 产品的详细硬件信息，请查阅以下产品文档。
-
-| CodexPad型号 | 详情 |
-| :--- | :--- |
-| CodexPad-C10 | [产品详情](../../../codex_pad_c10/blob/main/README.zh-CN.md#codexpad-c10) |
-| CodexPad-S10 | [产品详情](../../../codex_pad_s10/blob/main/README.zh-CN.md#codexpad-s10) |
+本扩展是专为**CodexPad**系列手柄提供的MakeCode扩展，支持**micro:bit**通过蓝牙连接并读取手柄的所有按键与摇杆输入状态。
 
 ## 特性
 
-- **Bluetooth Device Address直连**：通过已知的**Bluetooth Device Address**，快速与指定手柄建立稳定连接。
+- **地址直连**：通过指定手柄的地址，快速与指定手柄建立稳定连接。
 
 - **实时按键事件检测**：可实时读取所有按键的输入状态，并区分**按下**、**释放**和**长按**三种事件。
 
@@ -27,13 +22,12 @@
 
 #### 熟悉产品文档
 
-- 详细阅读 CodexPad 产品手册，全面了解硬件特性、熟悉手柄按键摇杆布局、功能定义、指示灯状态以及开关机操作等基本信息。
+- 详细阅读手柄产品文档，全面了解硬件特性、熟悉手柄按键摇杆布局、功能定义、指示灯状态、获取地址的方法及开关机操作等基本信息。
 
-#### 获取并记录手柄**Bluetooth Device Address(BD_ADDR)**
-
-> **⚠️ 重要提示**：本库直连的示例是通过 **Bluetooth Device Address(BD_ADDR)** 进行连接。**编程时，必须在代码明确指定您手柄的Bluetooth Device Address(BD_ADDR)。**
-
-请参考产品手册中提供的方法，获取您手柄的**Bluetooth Device Address(BD_ADDR)**。其格式通常为 `"16:00:00:00:02:72"`（由0-9、A-F的字符组成，冒号为半角）。请妥善记录此信息，后续需要在代码为您自己手柄的实际**Bluetooth Device Address(BD_ADDR)**。
+    | 手柄型号 | 产品文档 |
+    | :--- | :--- |
+    | CodexPad-C10 | [CodexPad-C10产品文档](../../../codex_pad_c10/blob/main/README.zh-CN.md#codexpad-c10) |
+    | CodexPad-S10 | [CodexPad-S10产品文档](../../../codex_pad_s10/blob/main/README.zh-CN.md#codexpad-s10) |
 
 #### 开启手柄并进入待连接状态
 
